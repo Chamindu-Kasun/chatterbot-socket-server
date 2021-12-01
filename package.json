@@ -1,0 +1,15 @@
+{
+  "name": "sockets",
+  "version": "1.0.0",
+  "description": "socket server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "chamindu kasun",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.3.2"
+  }
+}
