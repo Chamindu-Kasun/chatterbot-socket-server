@@ -1,8 +1,23 @@
-const io = require("socket.io")(8900, {
-    cors : {
-        origin : ["https://mobios-chatter-app-frontend.web.app:3000" , "https://mobios-chatter-app-backend.herokuapp.com:5000"]
-    }
-});
+const express = require("express");
+const socketio = require("socket.io");
+const cors = require("cors");
+const http = require("http")
+require("dotenv").config();
+const router = require("./router")
+
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server)
+
+app.use(cors());
+
+//Routes
+app.use(router)
+// const io = require("socket.io")(8900, {
+//     cors : {
+//         origin : ["https://mobios-chatter-app-frontend.web.app:3000" , "https://mobios-chatter-app-backend.herokuapp.com:5000"]
+//     }
+// });
 
 let users = [];
 
@@ -47,3 +62,6 @@ io.on("connection", (socket) => {
         io.emit("getUsers", users)
     })
 })
+
+const PORT = process.env.PORT;
+server.listen( PORT,() => console.log(`Server started on ${PORT}`));
