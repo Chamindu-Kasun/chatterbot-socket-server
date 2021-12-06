@@ -7,9 +7,17 @@ const router = require("./router")
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server)
+const io = socketio(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+})
 
-app.use(cors({origin : "*"}));
+// app.use(cors({
+//     origin : "*",
+//     methods: ["GET", "POST"]
+// }));
 
 //Routes
 app.use(router)
