@@ -9,15 +9,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server)
 
-app.use(cors());
+app.use(cors({origin : "*"}));
 
 //Routes
 app.use(router)
-// const io = require("socket.io")(8900, {
-//     cors : {
-//         origin : ["https://mobios-chatter-app-frontend.web.app:3000" , "https://mobios-chatter-app-backend.herokuapp.com:5000"]
-//     }
-// });
 
 let users = [];
 
