@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         const user = getUser(receiverId);
 
         console.log("user", user)
-        io.to(user.socketId).emit("getMessage", {
+        io.emit("getMessage", {
             senderId,
             text
         })
