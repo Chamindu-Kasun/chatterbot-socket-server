@@ -10,14 +10,8 @@ const server = http.createServer(app);
 const io = socketio(server, {
     cors: {
         origin: "*",
-        methods: ["GET", "POST"]
     }
 })
-
-// app.use(cors({
-//     origin : "*",
-//     methods: ["GET", "POST"]
-// }));
 
 //Routes
 app.use(router)
@@ -52,7 +46,7 @@ io.on("connection", (socket) => {
         const user = getUser(receiverId);
 
         console.log("user", user)
-        io.emit("getMessage", {
+        io.to(user.socketId).emit("getMessage", {
             senderId,
             text
         })
