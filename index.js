@@ -37,18 +37,19 @@ io.on("connection", (socket) => {
 
     //Connect
     socket.on("addUser", userId => {
-        addUser(userId, socket.id)
-        io.emit("getUsers", users)
+        addUser(userId, socket.id);
+        io.emit("getUsers", users);
     });
 
     //Get & Send Message
-    socket.on("sendMessage", ({senderId, receiverId, text}) => {
+    socket.on("sendMessage", ({senderId, receiverId, text, receiver}) => {
         const user = getUser(receiverId);
 
         console.log("user", user)
         io.to(user.socketId).emit("getMessage", {
             senderId,
-            text
+            text,
+            receiver
         })
     })
 
