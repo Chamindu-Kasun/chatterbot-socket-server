@@ -45,8 +45,6 @@ io.on("connection", (socket) => {
     //Get & Send Message
     socket.on("sendMessage", ({senderId, receiverId, text, receiver,media}) => {
         const user = getUser(receiverId);
-
-        console.log("user", user)
         io.to(user.socketId).emit("getMessage", {
             senderId,
             text,
@@ -54,6 +52,15 @@ io.on("connection", (socket) => {
             media
         })
     })
+
+    socket.on("operatorRequested",(message) => {
+        socket.broadcast.emit("newClient", {
+            from: message.from,
+            text: message.text
+            createdAt: new Date().getTime()
+        });
+    })
+
 
     //Disconnect
     socket.on("disconnect", ()=>{
