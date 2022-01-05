@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
     socket.on("operatorRequested",(message) => {
         socket.broadcast.emit("newClient", {
             from: message.from,
-            text: message.text
+            text: message.text,
             createdAt: new Date().getTime()
         });
     })
