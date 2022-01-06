@@ -61,6 +61,12 @@ io.on("connection", (socket) => {
         });
     })
 
+    socket.on("clientAccepted", ({operatorId, receiverId}) => {
+        const user = getUser(receiverId);
+        io.to(user.socketId).emit("operator", {
+            operatorId
+        })
+    })
 
     //Disconnect
     socket.on("disconnect", ()=>{
